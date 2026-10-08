@@ -1,0 +1,278 @@
+
+<DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gim Plus | Gestión del gimnasio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Encabezado y menú principal -->
+    <header class="encabezado">
+        <div class="logo">GIM PLUS</div>
+
+        <nav class="menu">
+            <a href="#inicio">Inicio</a>
+            <a href="#rutinas">Rutinas</a>
+            <a href="#pagos">Pagos</a>
+            <a href="#usuarios">Usuarios</a>
+            <a href="#recomendaciones">Recomendaciones</a>
+        </nav>
+
+        <a href="#ingreso" class="boton">Ingresar</a>
+    </header>
+
+    <main>
+        <!-- Página de inicio -->
+        <section id="inicio" class="inicio">
+            <div class="inicio-texto">
+                <span class="etiqueta">BIENVENIDO A GIM PLUS</span>
+                <h1>Organiza tu entrenamiento y mejora tu bienestar</h1>
+                <p>
+                    Gim Plus es un sistema diseñado para facilitar
+                    la gestión del gimnasio, organizar las rutinas,
+                    consultar los pagos y administrar los usuarios.
+                </p>
+                <a href="#rutinas" class="boton">Conocer las rutinas</a>
+            </div>
+
+            <div class="resumen">
+                <h2>Resumen general</h2>
+                <div class="dato">
+                    <span>Rutinas disponibles</span>
+                    <strong>4</strong>
+                </div>
+                <div class="dato">
+                    <span>Pagos pendientes</span>
+                    <strong>1</strong>
+                </div>
+                <div class="dato">
+                    <span>Usuarios registrados</span>
+                    <strong>28</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de rutinas -->
+        <section id="rutinas" class="seccion">
+            <h2>Rutinas de entrenamiento</h2>
+            <p class="descripcion">
+                Consulta las rutinas disponibles y organiza
+                tus actividades físicas.
+            </p>
+
+            <div class="contenedor-tarjetas">
+                <article class="tarjeta">
+                    <h3>Rutina de fuerza</h3>
+                    <p>
+                        Ejercicios para fortalecer los músculos
+                        y mejorar la resistencia.
+                    </p>
+                    <button class="boton-secundario"
+                        onclick="mostrarMensaje('Rutina de fuerza')">
+                        Ver rutina
+                    </button>
+                </article>
+
+                <article class="tarjeta">
+                    <h3>Rutina cardiovascular</h3>
+                    <p>
+                        Actividades para mejorar la resistencia
+                        y la condición física.
+                    </p>
+                    <button class="boton-secundario"
+                        onclick="mostrarMensaje('Rutina cardiovascular')">
+                        Ver rutina
+                    </button>
+                </article>
+
+                <article class="tarjeta">
+                    <h3>Rutina de flexibilidad</h3>
+                    <p>
+                        Ejercicios para mejorar la movilidad
+                        y la flexibilidad corporal.
+                    </p>
+                    <button class="boton-secundario"
+                        onclick="mostrarMensaje('Rutina de flexibilidad')">
+                        Ver rutina
+                    </button>
+                </article>
+
+                <article class="tarjeta">
+                    <h3>Rutina personalizada</h3>
+                    <p>
+                        Plan de entrenamiento adaptado
+                        a las necesidades del usuario.
+                    </p>
+                    <button class="boton-secundario"
+                        onclick="mostrarMensaje('Rutina personalizada')">
+                        Ver rutina
+                    </button>
+                </article>
+            </div>
+        </section>
+
+        <!-- Sección de pagos -->
+        <section id="pagos" class="seccion fondo-claro">
+            <h2>Gestión de pagos</h2>
+            <p class="descripcion">
+                Consulta el estado de tu plan y revisa
+                la información de tus pagos.
+            </p>
+
+            <div class="tarjeta pago">
+                <div>
+                    <h3>Plan mensual</h3>
+                    <p>Estado: <span class="estado">Activo</span></p>
+                    <p>Próximo pago: 30 de septiembre</p>
+                </div>
+
+                <div class="pago-accion">
+                    <strong>$80.000 COP</strong>
+                    <button class="boton"
+                        onclick="mostrarMensaje('La opción de pago está disponible en el diseño de muestra')">
+                        Realizar pago
+                    </button>
+                    <button class="boton-secundario"
+                        onclick="mostrarMensaje('Aquí se mostrará el historial de pagos')">
+                        Historial de pagos
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de usuarios -->
+        <section id="usuarios" class="seccion">
+            <h2>Administración de usuarios</h2>
+            <p class="descripcion">
+                Consulta la información de los usuarios registrados.
+            </p>
+
+            <div class="tabla-contenedor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Correo electrónico</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Laura Gómez</td>
+                            <td>laura@email.com</td>
+                            <td>Activo</td>
+                            <td>
+                                <button class="boton-secundario"
+                                    onclick="mostrarMensaje('Editar usuario Laura Gómez')">
+                                    Editar
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Juan Pérez</td>
+                            <td>juan@email.com</td>
+                            <td>Activo</td>
+                            <td>
+                                <button class="boton-secundario"
+                                    onclick="mostrarMensaje('Editar usuario Juan Pérez')">
+                                    Editar
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>María López</td>
+                            <td>maria@email.com</td>
+                            <td>Inactivo</td>
+                            <td>
+                                <button class="boton-secundario"
+                                    onclick="mostrarMensaje('Editar usuario María López')">
+                                    Editar
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <button class="boton"
+                onclick="mostrarMensaje('Formulario para registrar un nuevo usuario')">
+                Registrar usuario
+            </button>
+        </section>
+
+        <!-- Recomendaciones -->
+        <section id="recomendaciones" class="seccion fondo-claro">
+            <h2>Recomendaciones para tu bienestar</h2>
+            <p class="descripcion">
+                Consejos sencillos para acompañar tu entrenamiento.
+            </p>
+
+            <div class="contenedor-tarjetas">
+                <article class="tarjeta">
+                    <h3>Alimentación saludable</h3>
+                    <p>
+                        Mantén una alimentación equilibrada,
+                        consume frutas y verduras y toma suficiente agua.
+                    </p>
+                </article>
+
+                <article class="tarjeta">
+                    <h3>Uso de máquinas</h3>
+                    <p>
+                        Utiliza los equipos de manera adecuada
+                        y solicita orientación cuando sea necesario.
+                    </p>
+                </article>
+
+                <article class="tarjeta">
+                    <h3>Descanso e hidratación</h3>
+                    <p>
+                        Respeta tus tiempos de descanso
+                        y mantente hidratado durante el ejercicio.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Ingreso de muestra -->
+        <section id="ingreso" class="seccion ingreso">
+            <h2>Ingreso al sistema</h2>
+            <p class="descripcion">
+                Esta sección representa el acceso de los usuarios.
+            </p>
+
+            <form onsubmit="iniciarSesion(event)">
+                <label for="correo">Correo electrónico</label>
+                <input type="email" id="correo"
+                    placeholder="Ingresa tu correo" required>
+
+                <label for="contrasena">Contraseña</label>
+                <input type="password" id="contrasena"
+                    placeholder="Ingresa tu contraseña" required>
+
+                <button type="submit" class="boton">
+                    Ingresar
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="pie">
+        <h3>GIM PLUS</h3>
+        <p>
+            Sistema de apoyo para la gestión de gimnasios.
+        </p>
+        <p>Proyecto de desarrollo de software</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
