@@ -1,0 +1,142 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>SIGIV — Inventario</title><style>
+:root{
+  --navy:#1F3A5F; --navy-d:#152A46; --amber:#E8871E; --amber-d:#C96F0F;
+  --bg:#F4F6F8; --text:#232B33; --muted:#6B7684; --line:#E1E5E9; --white:#fff;
+  --green:#2E9E6C; --green-bg:#E4F7EE; --red:#D64545; --red-bg:#FBE7E7; --amber-bg:#FDEEE0;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{font-family: Arial, sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased;}
+a{text-decoration:none; color:inherit;}
+.wrap{width:1280px; min-height:800px; display:flex; flex-direction:column;}
+.body-row{display:flex; flex:1;}
+.sidebar{width:224px; background:var(--navy-d); color:#fff; padding:18px 0; flex-shrink:0;}
+.brand{display:flex; align-items:center; gap:11px; padding:0 20px 20px 20px; border-bottom:1px solid rgba(255,255,255,.1); margin-bottom:10px;}
+.brand .logo{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--amber),var(--amber-d));display:flex;align-items:center;justify-content:center;font-weight:bold;color:#152A46;font-size:15px;}
+.brand .name{font-size:16px; font-weight:bold;}
+.nav-section{font-size:10px; color:#7488A0; text-transform:uppercase; letter-spacing:1px; font-weight:bold; padding:12px 20px 6px 20px;}
+.nav-item{display:flex; align-items:center; gap:12px; padding:10px 20px; font-size:13.5px; color:#B9C6D6; border-right:3px solid transparent;}
+.nav-item svg{width:17px; height:17px; flex-shrink:0; opacity:.85;}
+.nav-item.active{background:rgba(232,135,30,.16); color:#fff; border-right-color:var(--amber); font-weight:bold;}
+.nav-item.active svg{opacity:1;}
+.main{flex:1; display:flex; flex-direction:column; min-width:0;}
+header.topbar{height:60px; background:var(--white); border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; padding:0 28px; flex-shrink:0;}
+.topbar .title{font-size:17px; font-weight:bold; color:var(--navy);}
+.topbar .right{display:flex; align-items:center; gap:18px; position:relative;}
+.bellwrap{position:relative;}
+.bell{width:19px;height:19px; color:var(--muted); cursor:pointer;}
+.bell-dot{position:absolute; top:-2px; right:-2px; width:8px; height:8px; background:var(--red); border-radius:50%; border:1.5px solid #fff;}
+.notif-panel{position:absolute; top:32px; right:-8px; width:280px; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 8px 24px rgba(20,40,70,.14); padding:6px 0; z-index:5;}
+.notif-panel .nh{font-size:11px; font-weight:bold; color:var(--muted); text-transform:uppercase; padding:8px 14px 6px 14px;}
+.notif-panel ul{list-style:none;}
+.notif-panel li{padding:9px 14px; font-size:12.5px; color:var(--text); border-top:1px solid #F1F3F5; line-height:1.4;}
+.notif-panel li b{color:var(--navy);}
+.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--navy),#2C4E78); color:#fff; display:flex; align-items:center; justify-content:center; font-size:11.5px; font-weight:bold;}
+main.content{flex:1; padding:22px 28px; display:flex; gap:20px; align-items:flex-start;}
+.content-main{flex:1; min-width:0;}
+.crumb{font-size:12px; color:var(--muted); margin-bottom:14px;}
+.crumb b{color:var(--navy);}
+aside.filters{width:200px; background:var(--white); border:1px solid var(--line); border-radius:12px; padding:18px 18px; flex-shrink:0;}
+aside.filters h3{font-size:12px; color:var(--navy); margin-bottom:12px; text-transform:uppercase; letter-spacing:.3px;}
+aside.filters .fgroup{margin-bottom:16px;}
+aside.filters .flabel{font-size:11px; font-weight:bold; color:var(--muted); margin-bottom:7px; display:block;}
+aside.filters .opt{display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--text); margin-bottom:7px;}
+aside.filters .opt .box{width:14px;height:14px;border:1.5px solid var(--line); border-radius:4px; flex-shrink:0;}
+aside.filters .opt .box.on{background:var(--amber); border-color:var(--amber);}
+aside.filters .opt .dot{width:13px;height:13px;border:1.5px solid var(--line); border-radius:50%; flex-shrink:0;}
+aside.filters .opt .dot.on{border-color:var(--amber); border-width:4px;}
+section.panel{background:var(--white); border:1px solid var(--line); border-radius:14px; padding:22px 26px; box-shadow:0 1px 3px rgba(20,40,70,.04); margin-bottom:18px;}
+section.panel h2{color:var(--navy); font-size:15.5px; margin-bottom:18px;}
+.row{display:flex; gap:18px; margin-bottom:16px;}
+.field{flex:1; display:flex; flex-direction:column; gap:6px;}
+label{font-size:11.5px; color:var(--muted); font-weight:bold; letter-spacing:.2px;}
+input, select, textarea{padding:9px 12px; border:1.5px solid var(--line); border-radius:8px; font-size:13px; background:#FBFCFD; font-family:Arial,sans-serif;}
+input:focus, select:focus{outline:none; border-color:var(--amber);}
+button, .btn{border:none; border-radius:8px; padding:9px 18px; font-size:13px; font-weight:bold; cursor:pointer; display:inline-block;}
+.primary{background:var(--amber); color:#fff; box-shadow:0 2px 6px rgba(232,135,30,.32);}
+.secondary{background:var(--navy); color:#fff;}
+.outline{background:transparent; color:var(--navy); border:1.5px solid var(--line);}
+.danger{background:var(--red); color:#fff;}
+table{width:100%; border-collapse:collapse; font-size:12.5px;}
+th{text-align:left; color:var(--muted); font-size:10.5px; text-transform:uppercase; letter-spacing:.3px; padding:9px 10px; border-bottom:2px solid var(--line);}
+td{padding:11px 10px; border-bottom:1px solid var(--line); color:var(--text); vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+.thumb{width:34px;height:34px;border-radius:7px;background:#EEF1F4; display:inline-flex; align-items:center; justify-content:center; color:var(--muted); vertical-align:middle; margin-right:9px;}
+.thumb svg{width:17px;height:17px;}
+.prodcell{display:flex; align-items:center;}
+.badge{padding:4px 10px; border-radius:14px; font-size:10.5px; font-weight:bold;}
+.badge.ok{background:var(--green-bg); color:var(--green);}
+.badge.low{background:var(--amber-bg); color:var(--amber-d);}
+.badge.out{background:var(--red-bg); color:var(--red);}
+.cards{display:flex; gap:14px; margin-bottom:18px;}
+.card{flex:1; background:var(--white); border:1px solid var(--line); border-radius:12px; padding:15px 18px; box-shadow:0 1px 3px rgba(20,40,70,.04);}
+.card .k{font-size:10.5px; color:var(--muted); font-weight:bold; text-transform:uppercase; letter-spacing:.3px;}
+.card .v{font-size:21px; font-weight:bold; color:var(--navy); margin-top:5px;}
+.toolbar{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;}
+.search{padding:9px 15px 9px 36px; border:1.5px solid var(--line); border-radius:22px; font-size:12.5px; width:250px; background:#fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="%236B7684" stroke-width="2"><circle cx="6" cy="6" r="5"/><path d="M10 10l3 3"/></svg>') no-repeat 13px center;}
+.pill-tabs{display:flex; gap:8px; margin-bottom:16px;}
+.pill{padding:7px 15px; border-radius:20px; font-size:12px; font-weight:bold; background:var(--white); color:var(--muted); border:1px solid var(--line);}
+.pill.active{background:var(--navy); color:#fff; border-color:var(--navy);}
+footer.sitefoot{background:var(--white); border-top:1px solid var(--line); padding:13px 28px; display:flex; justify-content:space-between; align-items:center; font-size:11px; color:var(--muted); flex-shrink:0;}
+footer.sitefoot a{color:var(--navy); font-weight:bold;}
+.modal-overlay{position:fixed; inset:0; background:rgba(21,42,70,.55); display:flex; align-items:center; justify-content:center;}
+.modal{width:380px; background:#fff; border-radius:14px; padding:26px 28px; box-shadow:0 20px 50px rgba(0,0,0,.3);}
+.modal .micon{width:44px;height:44px;border-radius:50%;background:var(--red-bg); color:var(--red); display:flex; align-items:center; justify-content:center; margin-bottom:14px;}
+.modal h3{font-size:16px; color:var(--navy); margin-bottom:8px;}
+.modal p{font-size:13px; color:var(--muted); margin-bottom:20px; line-height:1.5;}
+.modal .mactions{display:flex; gap:10px; justify-content:flex-end;}
+
+</style></head><body>
+<div class="wrap">
+  <header class="topbar"><div class="title">Inventario</div><div class="right"><div class="bell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div><div class="avatar">JV</div></div></header>
+  <div class="body-row">
+    <nav class="sidebar">
+    <div class="brand"><div class="logo">SV</div><div class="name">SIGIV</div></div>
+    <div class="nav-section">Módulos</div>
+    <a href="reportes.html"><div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M2 20h20"/></svg> Reportes</div></a>
+<a href="inventario.html"><div class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg> Inventario</div></a>
+<a href="ventas.html"><div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.4l2.2 11.4A2 2 0 0 0 9.1 16h8.4a2 2 0 0 0 2-1.6L21.5 7H6"/></svg> Ventas</div></a>
+<a href="proveedores.html"><div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="8.5" width="13" height="8" rx="1.2"/><path d="M14.5 11h3.3L21 14.3V16.5h-6.5"/><circle cx="6" cy="18.5" r="1.6"/><circle cx="17.5" cy="18.5" r="1.6"/></svg> Proveedores</div></a>
+  </nav>
+    <div class="main">
+      <main class="content">
+        
+        <div class="content-main">
+          <div class="crumb"><a href="inventario.html">Inventario</a> &nbsp;›&nbsp; <b>Registrar nuevo producto</b></div>
+          
+  <section class="panel">
+    <h2>Registrar nuevo producto</h2>
+    <div class="row">
+      <div class="field" style="flex:0 0 90px; align-items:center;">
+        <label>&nbsp;</label>
+        <div class="thumb" style="width:64px; height:64px; border-radius:10px;"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8 12 3 3 8l9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/></svg></div>
+      </div>
+      <div class="field"><label>NOMBRE DEL PRODUCTO</label><input placeholder="Ej. Taladro percutor 750W"></div>
+      <div class="field"><label>CATEGORÍA</label><select><option>Herramientas eléctricas</option></select></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>DESCRIPCIÓN</label><input placeholder="Descripción breve del producto"></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>PRECIO DE COMPRA</label><input placeholder="$ 0.00"></div>
+      <div class="field"><label>PRECIO DE VENTA</label><input placeholder="$ 0.00"></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>STOCK ACTUAL</label><input placeholder="0"></div>
+      <div class="field"><label>STOCK MÍNIMO</label><input placeholder="0"></div>
+      <div class="field"><label>PROVEEDOR</label><select><option>Ferretería Industrial S.A.S.</option></select></div>
+    </div>
+    <div style="display:flex; gap:12px; justify-content:flex-end; border-top:1px solid #E1E5E9; padding-top:16px; margin-top:4px;">
+      <a href="inventario.html"><button class="outline">Cancelar</button></a>
+      <a href="inventario.html"><button class="primary">Guardar producto</button></a>
+    </div>
+  </section>
+        </div>
+      </main>
+      <footer class="sitefoot">
+    <div>© 2026 Ferretería La Economía S.A.S. — Sistema SIGIV</div>
+    <div>Versión 1.0.0 &nbsp;·&nbsp; <a href="#">Soporte técnico</a></div>
+  </footer>
+    </div>
+  </div>
+</div>
+</body></html>
